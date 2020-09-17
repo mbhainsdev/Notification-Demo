@@ -12,3 +12,4 @@ Steps to demo
 4. run &#8594; dotnet restore
 5. run &#8594; dotnet build
 6. run &#8594; dotnet run
+7. use api key &#8594; mystrongapikey
