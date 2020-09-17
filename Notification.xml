@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Notification</name>
+    </assembly>
+    <members>
+        <member name="M:Notification.Controllers.NotificationController.PostAsync(Notification.Model.Notify)">
+            <summary>
+            Generate - Alert Notification
+            </summary>
+            <param name="data">Notification Object</param>
+            <response code="200">Notification Succesful</response>
+            <response code="500">Unable to send notification. Please try again.</response>
+            <returns>Status message about creation of delete alert rules job</returns>
+        </member>
+        <member name="P:Notification.Model.Notify.Message">
+            <summary>
+            Message / Body
+            </summary>
+            <example>Alert Performance issue</example>
+        </member>
+        <member name="P:Notification.Model.Notify.To">
+            <summary>
+            Mail to
+            </summary>
+            <example>xyz@org.com</example>
+        </member>
+        <member name="P:Notification.Model.Notify.Subject">
+            <summary>
+            Email Subject
+            </summary>
+            <example>Alert test application unavailable</example>
+        </member>
+        <member name="P:Notification.Model.Notify.SlackWebhook">
+            <summary>
+            Slack webhook url
+            </summary>
+            <example>https://hooks.slack.com/services/T01fsfs3Z/B01dgfd/1nZWGsfadaD</example>
+        </member>
+    </members>
+</doc>
