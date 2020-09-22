@@ -7,7 +7,7 @@ namespace Notification.Helper
 {
     public class Slack
     {
-        public static async Task SlackNotify(string webHookUrl, string message)
+        public static async Task SlackNotify(string webHookUrl, string message, AppSettingsHelper appSettings)
         {
 
             try
@@ -24,5 +24,7 @@ namespace Notification.Helper
             }
 
         }
+
     }
+
 }

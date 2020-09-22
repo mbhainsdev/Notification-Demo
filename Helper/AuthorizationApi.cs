@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Options;
 using System;
+using System.Configuration;
 using System.Threading.Tasks;
 
 namespace Notification.Helper
 {
+
     public class AuthorizationApi : Attribute, IAsyncActionFilter
     {
 
@@ -17,7 +20,6 @@ namespace Notification.Helper
                 context.Result = new UnauthorizedResult();
                 return;
             }
-
             var apiKey = "mystrongapikey";
             if (!apiKey.Equals(givenKey))
             {

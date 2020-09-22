@@ -23,6 +23,8 @@ namespace Notification
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMvc();
+            services.Configure<AppSettingsHelper>(Configuration.GetSection("AppSettings"));
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {

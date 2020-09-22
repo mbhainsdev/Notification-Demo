@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Notification.Helper;
 using Notification.Model;
 using System;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -15,11 +15,11 @@ namespace Notification.Controllers
     [AuthorizationApi]
     public class NotificationController : ControllerBase
     {
-        private IConfiguration configuration;
-        public NotificationController(IConfiguration iConfig)
-        {
-            configuration = iConfig;
 
+        private readonly AppSettingsHelper _appsettings;
+        public NotificationController(IOptions<AppSettingsHelper> appsettings)
+        {
+            _appsettings = appsettings.Value;
         }
 
         /// <summary>
@@ -34,30 +34,7 @@ namespace Notification.Controllers
         {
             try
             {
-                string sgApiKey = configuration.GetValue<string>("Settings:sgKey");
-                //string from = configuration.GetValue<string>("Settings:from");
-                string webHookUrl = data.SlackWebhook;//configuration.GetValue<string>("Settings:webHookUrl");
-                //Validate email
-                foreach (string email in data.To.Split(','))
-                {
-                    if (!Email.IsValid(email)) { throw new Exception("Email is not valid"); }
-                }
-                if (data.To.Split(',').Count() > 1)
-                {
-                    var to = data.To.Split(',').ToList();
-                    await Email.SendEmail(to, data.Subject, data.Message, sgApiKey);
-                }
-                else
-                {
-                    await Email.SendEmail(data.To, data.Subject, data.Message, sgApiKey);
-                }
-
-                // Slack Notify
-                if (!string.IsNullOrEmpty(data.SlackWebhook))
-                {
-                    new Uri(data.SlackWebhook);
-                    await Slack.SlackNotify(webHookUrl, data.Subject);
-                }
+                await NotifcationLocator.GetInstance().NotifyAllAsync(data, _appsettings);
 
                 string jsonFileContent = "Notification created successfully";
                 return new ContentResult()

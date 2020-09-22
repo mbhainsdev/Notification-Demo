@@ -17,7 +17,7 @@ namespace Notification.Model
         /// </summary>
         /// <example>xyz@org.com</example>
         [JsonProperty("to", Required = Required.Always)]
-        public string To { get; set; }//= "xyz@org.com";
+        public string To { get; set; }//= "manish.bhainsora@gmail.com";
 
         /// <summary>
         /// Email Subject
